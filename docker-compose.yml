@@ -1,0 +1,25 @@
+#siempre empezacmos con services
+services:
+  #server name
+  apache:
+    image: httpd:2.4 #nombre de la imagen
+    ports:
+      - "8080:80"
+    
+    volumes:
+    #priemro la ruta donde esta la pagina web
+    #después de los : la ruta por defecto de htdocs en docker
+      - ./htdocs:/usr/local/apache2/htdocs
+
+    container_name: dam_web1 #nombre del contenedor
+
+#compose permite lanzar varios servers al mismo tiempo, ahora lanzaremos otro de apache
+
+  apache2:
+    image: httpd:2.4
+    ports:
+      - "9080:80"
+    
+    volumes:
+      - ./htdocs:/usr/local/apache2/htdocs
+    container_name: dam_web2
